@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OrderDetails>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-heading"><h3>Просмотр деталей заказа</h3></div>
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th class="text-center">Название товара</th>
+        <th class="text-center">Тип товара</th>
+        <th class="text-center">Цена товара</th>
+        <th class="text-center">Общая цена</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">@item.Product.Name</td>
+            <td class="text-center">@item.Product.Type</td>
+            <td class="text-center">@item.Product.Price</td>
+            <td class="text-center">@item.Price</td>
+        </tr>
+    }
+</table>
+<a class="btn btn-outline-primary" asp-controller="Order" asp-action="GetAllOrders">Назад</a>
+

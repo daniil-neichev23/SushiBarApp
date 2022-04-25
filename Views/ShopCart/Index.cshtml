@@ -1,0 +1,93 @@
+﻿@model SushiBarApp.ViewModels.ShopCartViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ваша корзина</h2>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th class="text-center">Кол-во</th>
+            <th class="text-center">Товар</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Общая цена</th>
+        </tr>
+    </thead>
+    <tbody> 
+        @*id="tableBody"*@
+        @foreach (var item in Model.ShopCart.ListShopItems)
+        {
+            <tr>
+                <td class="text-center">@item.Quantity</td>
+                <td class="text-center">@item.Product.Name</td>
+                <td class="text-center">@item.Product.Price.ToString()</td>
+                <td class="text-center">
+                    @((item.Quantity * item.Product.Price).ToString())
+                </td>
+                <td class="text-right">
+                    @using (Html.BeginForm("RemoveFromCart", "ShopCart"))
+                    {
+                        @Html.Hidden("productId", item.Product.Id)
+                        <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Итого:</td>
+            <td class="text-right">
+                @Model.ShopCart.ComputeTotalValue().ToString()
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Оформить заказ</a>
+    <a class="btn btn-outline-primary ml-1" asp-controller="Product" asp-action="GetProducts">Продолжить покупки</a>
+</div>
+
+@*<script>
+    $(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("/sushi").build();
+        connection.start();
+
+        connection.on("LoadItems", function () {
+            LoadProdData();
+        })
+
+
+
+        LoadProdData();
+        function LoadProdData() {
+            var tr = '';
+
+            $.ajax({
+                url: '/ShopCart/GetItemsFromCart',
+                method: 'GET',
+                success: (result) => {
+                    $.each(result, (k, v) => {
+                        tr += `<tr>
+                            <td>${v.ShopCart.ListShopItems.Quantity}</td>
+                            <td>${v.Product.Name}</td>
+                            <td>${v.Product.Price.ToString("c")}</td>
+                            <td>${(item.Quantity * item.Product.Price).ToString("c")}</td>
+                        </tr>`;
+                        console.log(v);
+                    })
+
+                    $('#tableBody').html(tr);
+
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            })
+
+        }
+
+    })
+</script>*@

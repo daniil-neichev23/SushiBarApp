@@ -1,0 +1,55 @@
+﻿@using SushiBarApp.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SushiBarApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon" href="/img/Sushi_icon-icons.com_68684.ico" />
+</head>
+<body>
+    <header>
+        <div class="bg-dark collapse" id="navbarHeader" style="">
+            <div class="container">
+                <div class="row justify-content-center">
+                    @*<div class="col-sm-8 col-md-7 py-4">
+                            <h4 class="text-white">About</h4>
+                        </div>*@
+                    <a asp-controller="Product" asp-action="GetProducts" asp-route-categoryName="Суши" class="btn btn-info ml-3">Суши</a>
+                    <a asp-controller="Product" asp-action="GetProducts" asp-route-categoryName="Роллы" class="btn btn-info ml-3">Роллы</a>
+                    <a asp-controller="Product" asp-action="GetProducts" asp-route-categoryName="Сеты" class="btn btn-info ml-3">Сеты</a>
+                    <a asp-controller="Product" asp-action="GetProducts" asp-route-categoryName="Напитки" class="btn btn-info ml-3">Напитки</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-end">
+                <a asp-action="GetProducts" asp-controller="Product" class="navbar-brand d-flex align-items-center" style="margin-right: 34%">
+                    <strong>Sushi Bar</strong>
+                </a>
+                <button class="navbar-toggler collapsed mr-2" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @Html.RenderAction("Summary", "ShopCart")
+                @Html.RenderAction("AuthState", "Account")
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

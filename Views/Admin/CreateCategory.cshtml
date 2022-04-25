@@ -1,0 +1,15 @@
+﻿@model Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-heading"><h3>Создание категории</h3></div>
+
+@using (Html.BeginForm("CreateCategory", "Category",
+   FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="text" class="form-control" placeholder="Введите название категории" asp-for="Name" />
+    <input type="submit" value="Создать" class="btn btn-primary mt-2" />
+    <a class="btn btn-outline-primary mt-2 ml-1" asp-action="Index" asp-controller="Admin">Назад</a>
+}
+

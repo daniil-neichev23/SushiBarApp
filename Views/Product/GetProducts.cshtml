@@ -1,0 +1,47 @@
+﻿@using SushiBarApp.Helpers
+@model IEnumerable<Product>
+@if (string.IsNullOrEmpty(@ViewBag.CurrentCategory))
+{
+    <h1>Наши предложения</h1>
+}
+else
+{
+    <h1>@ViewBag.CurrentCategory</h1>
+}
+
+<div class="album py-5">
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src=@Url.Action("GetImage", "Product", new {productId = product.Id}) alt="product img" style="height: 225px; width: 100%; display: block" data-holder-rendered="true">
+                        <div class="card-body">
+                            @*<h5 class="card-title">@product.Name</h5>*@
+                            <p><a href="~/Product/ProductInfo/@product.Id">@product.Name</a></p>
+                            <p class="card-text">@product.Description</p>
+                            @if (@product.Type == "Drink")
+                            {
+                                <p class="card-subtitle mb-2 text-muted">@product.Count Шт/@product.Volume мл</p>
+                            }
+                            else
+                            {
+                                <p class="card-subtitle mb-2 text-muted">@product.Count Шт/@product.Volume г</p>
+                            }
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id">Добавить в корзину</a>
+                                </div>
+                                <h6 class="card-subtitle text-info">Цена: @product.Price</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

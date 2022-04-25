@@ -1,0 +1,41 @@
+﻿@model SushiBarApp.Data.Models.Product
+@{
+    ViewData["Title"] = "Fishing Line";
+    Layout = "_Layout";
+}
+
+@*<h3>@Model.Name</h3>*@
+
+
+<table>
+    <tr>
+        <td>
+            <p><img src="@Url.Action("GetImage", "Product", new {ProductId = Model.Id})" width="400" height="450"></p>
+        </td>
+        <td>
+            <h3>@Model.Name</h3>
+            <p>Description: @Model.Description</p>
+            <form asp-action="AddReview" method="post" asp-route-id="@Model.Id">
+                <div class="form-group">
+                    @*<label for="exampleFormControlTextarea1">Write a review</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>*@
+                    <input type="text" class="form-control" placeholder="Введите комментарий" name="text" />
+
+                    <button class="btn btn-secondary" type="submit">Add a review</button>
+
+                    @*<input type="button" value="Cancel" onclick="location.href='@Url.Action("Index","Home")';" />*@
+                </div>
+            
+            </form>
+
+            @Html.ActionLink("Reviews", "ViewReviews", "Product", new {id = Model.Id })
+
+        @*<p>Price: @Model.Price</p>
+        <p>Length: @Model.Length</p>
+        <p>Strength: @Model.Strength</p>
+        <p>Raiting: @Model.Rating</p>
+        <p><a href="~/Home/BuyRod/@Model.Id">Buy</a></p>*@
+        </td>
+    </tr>
+
+</table>

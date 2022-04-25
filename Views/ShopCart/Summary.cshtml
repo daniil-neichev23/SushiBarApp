@@ -1,0 +1,13 @@
+﻿@model ShopCart
+
+<div class="navbar-text navbar-right mr-2">
+    <b>Ваша корзина:</b>
+    @Model.ListShopItems.Sum(x => x.Quantity) товаров,
+    @Model.ComputeTotalValue().ToString()
+</div>
+<div class="navbar-right">
+    <a asp-controller="ShopCart" asp-action="Index" class="btn btn-outline-info mr-2">Корзина</a>
+</div>
+
+
+

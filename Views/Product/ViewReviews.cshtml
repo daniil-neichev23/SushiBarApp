@@ -1,0 +1,79 @@
+﻿@model IList<Review>
+@{
+    ViewData["Title"] = "Fishing Line";
+    Layout = "_Layout";
+}
+@if (@Model.Last().Sentiment.Substring(0, 8) == "Positive")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("Thank you for your review, it is extremely vital for us");
+        };
+    </script>
+}@if (@Model.Last().Sentiment.Substring(0, 8) == "Negative")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("We will do our best to make you proud");
+        };
+    </script>
+}
+@*<script type="text/javascript">
+            @if (Model.Last().Text=="Positive")
+            {
+                <text>
+                $(document).ready(function() {
+                    alert('Thank you for your attention');
+                });
+                </text>
+            }
+           @if (Model.Last().Text=="Negative")
+            {
+                <text>
+                $(document).ready(function() {
+                    alert('Fuck you bitch');
+                });
+                </text>
+            }
+    </script>*@
+<style>
+
+    .drawForm {
+        column-gap: 140px;
+    }
+</style>
+
+
+<table class="table drawForm" >
+
+    @*@foreach (Post post in Model.Posts)*@
+    @foreach (var post in Model)
+    {
+        <tr>
+            <td style="padding: 0 15px 0 15px;">
+                @Html.DisplayFor(item => post.Text)
+            </td>
+            @if (post.Sentiment == null)
+            {
+                continue;
+            }
+            @if (post.Sentiment.Substring(0,8) == "Positive" )
+            {
+
+
+            <td style="padding: 0 15px 0 15px; color:forestgreen;">
+                @Html.DisplayFor(item => post.Sentiment)
+            </td>
+            }
+            @if (post.Sentiment.Substring(0,8) == "Negative")
+            {
+
+
+            <td style="padding: 0 15px 0 15px; color: crimson;">
+                @Html.DisplayFor(item => post.Sentiment)
+            </td>
+            }
+        </tr>
+    }
+</table>
+

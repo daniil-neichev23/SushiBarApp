@@ -1,0 +1,14 @@
+﻿@model Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel-heading"><h3>Изменение категории "@Model.Name"</h3></div>
+
+@using (Html.BeginForm("ChangeCategoryName", "Category",
+  FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.TextBox("Name", Model.Name, new { @class = "form-control" });
+    <input type="submit" value="Изменить" class="btn btn-primary mt-2" />
+    <a class="btn btn-outline-primary mt-2 ml-1" asp-action="Index" asp-controller="Admin">Назад</a>
+}

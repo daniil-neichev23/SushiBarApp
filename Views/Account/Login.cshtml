@@ -1,0 +1,24 @@
+﻿@model SushiBarApp.ViewModels.LoginViewModel
+
+<form style="width: 300px; padding: 15px; margin: 0 auto; margin-top: 10%" asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+    <div class="validation text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Авторизируйтесь</h1>
+    </div>
+    <div class="form-label-group mb-2">
+        <input type="email" asp-for="Email" id="inputEmail" class="form-control" placeholder="Введите Email" required="" autofocus="">
+        
+        <span asp-validation-for="Email" />
+    </div>
+    <div class="form-label-group mb-4">
+        <input type="password" asp-for="Password" id="inputPassword" class="form-control" placeholder="Введите пароль" required="">
+        
+        <span asp-validation-for="Password" />
+    </div>
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    <a class="mt-5 mb-2 text-muted text-center" asp-action="Register" asp-controller="Account">Регистрация</a>
+</form>
+
+

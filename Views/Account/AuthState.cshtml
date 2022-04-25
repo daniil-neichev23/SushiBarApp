@@ -1,0 +1,20 @@
+﻿@model bool
+@if (Model)
+{
+    <a asp-action="GetAllOrders" asp-controller="Order" class="btn btn-outline-light mr-2">
+        <strong>Мои заказы</strong>
+    </a>
+    <div class="navbar-right">
+        <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-warning">Выйти</a>
+    </div>
+}
+else
+{
+    <div class="navbar-right">
+        <a asp-controller="Account" asp-action="Login" class="btn btn-success">Войти</a>
+    </div>
+}
+
+
+
+
